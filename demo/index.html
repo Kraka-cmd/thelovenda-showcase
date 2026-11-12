@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demo-webwinkel | The Lovenda Store</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="notice">
+    <div class="wrap">Dit is een demo-omgeving. De winkel is niet echt, er kan niets besteld worden en er zitten bewust fouten in. <a href="../rapport/">Bekijk het testrapport</a>.</div>
+  </div>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../">The Lovenda Store</a>
+      <nav>
+        <a href="../">Over deze demo</a>
+        <a href="../rapport/">Testrapport</a>
+        <span style="margin-left:16px">Winkelwagen <span class="badge" id="badge" aria-live="polite">0</span></span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="shop">
+      <section aria-labelledby="h-products">
+        <h2 id="h-products">Producten</h2>
+        <p>Gratis verzending vanaf € 50,00. Met code WELKOM10 krijg je eenmalig 10% korting.</p>
+        <label for="search">Zoeken</label>
+        <input id="search" type="search" placeholder="Zoek een product" style="width:100%;max-width:340px">
+        <div class="grid" id="products" style="margin-top:16px"></div>
+      </section>
+
+      <section aria-labelledby="h-cart">
+        <h2 id="h-cart">Winkelwagen</h2>
+        <div id="cart"></div>
+
+        <form id="code-form" class="row" style="margin-top:14px">
+          <div>
+            <label for="code">Kortingscode</label>
+            <input id="code" type="text" autocomplete="off">
+          </div>
+          <button class="btn small secondary" type="submit">Toepassen</button>
+        </form>
+        <p id="code-msg" class="msg" role="status"></p>
+
+        <div class="totals">
+          <div><span>Subtotaal</span><span id="subtotal"></span></div>
+          <div><span>Korting</span><span id="discount"></span></div>
+          <div><span>Verzending</span><span id="shipping"></span></div>
+          <div class="grand"><span>Totaal</span><span id="total"></span></div>
+        </div>
+
+        <form id="order-form">
+          <div class="row">
+            <div>
+              <label for="name">Naam</label>
+              <input id="name" type="text" required autocomplete="off">
+            </div>
+            <div>
+              <label for="email">E-mailadres</label>
+              <input id="email" type="email" required autocomplete="off">
+            </div>
+          </div>
+          <p style="margin:12px 0 0"><button class="btn" type="submit">Bestelling plaatsen</button></p>
+        </form>
+        <p id="order-msg" class="msg" role="status"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">Demo-omgeving bij een voorbeeld-acceptatietest. Ingevulde gegevens blijven in je browser en worden nergens naartoe gestuurd.</div>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

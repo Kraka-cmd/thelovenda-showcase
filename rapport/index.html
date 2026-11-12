@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voorbeeld-acceptatietestrapport | The Lovenda Store</title>
+  <meta name="description" content="Voorbeeld van een AI-ondersteund acceptatietestrapport: managementsamenvatting en technisch defectrapport voor een demo-webwinkel.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="notice">
+    <div class="wrap">Voorbeeldrapport. De geteste webwinkel is een demo en de zes bevindingen zijn bewust ingebouwd om de werkwijze te laten zien.</div>
+  </div>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../">The Lovenda Store</a>
+      <nav>
+        <a href="../">Over deze demo</a>
+        <a href="../demo/">Demo-webwinkel</a>
+        <a href="#" class="no-print" onclick="window.print();return false;">Opslaan als PDF</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" style="padding-bottom:8px">
+      <h1>Acceptatietestrapport demo-webwinkel</h1>
+      <p>Testcyclus 1, uitgevoerd op 12 november 2026. Testobject: <a href="../demo/">de demo-webwinkel</a> op deze site, in een Chromium-browser op desktop.</p>
+    </section>
+
+    <h2>1. Samenvatting voor de opdrachtgever</h2>
+    <div class="stats">
+      <div class="stat"><b>12</b><span>scenario's uitgevoerd</span></div>
+      <div class="stat"><b class="pass">6</b><span>geslaagd</span></div>
+      <div class="stat"><b class="fail">6</b><span>afgekeurd</span></div>
+      <div class="stat"><b>2</b><span>bevindingen met ernst hoog</span></div>
+    </div>
+    <p><strong>Advies: niet in productie nemen.</strong> Bladeren, toevoegen aan de winkelwagen en de basisberekening werken. Twee bevindingen raken direct de omzet: een klant kan de kortingscode onbeperkt herhalen (D-01) en met een negatief aantal een negatief orderbedrag maken (D-02). Die twee moeten zijn opgelost en opnieuw getest voordat de winkel live gaat.</p>
+    <p>De overige vier bevindingen kosten klanten of vertrouwen, maar blokkeren de livegang niet: gratis verzending wordt op precies € 50,00 niet toegekend, zoeken werkt alleen met de juiste hoofdletters, de winkelwagenteller loopt achter en een lege bestelling wordt geaccepteerd.</p>
+    <p><strong>Niet getest in deze cyclus:</strong> mobiele weergave, toegankelijkheid, snelheid, beveiliging en andere browsers. Over die onderdelen doet dit rapport geen uitspraak.</p>
+
+    <h2>2. Uitgevoerde scenario's</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Nr.</th><th>Scenario</th><th>Resultaat</th><th>Bevinding</th></tr></thead>
+        <tbody>
+          <tr><td>T01</td><td>Het productoverzicht toont alle zes producten</td><td class="pass">Geslaagd</td><td></td></tr>
+          <tr><td>T02</td><td>Zoeken op "Geurkaars" toont het juiste product</td><td class="pass">Geslaagd</td><td></td></tr>
+          <tr><td>T03</td><td>Zoeken op "geurkaars" (kleine letters) toont het juiste product</td><td class="fail">Afgekeurd</td><td><a href="#d04">D-04</a></td></tr>
+          <tr><td>T04</td><td>Een product toevoegen werkt de winkelwagen, de teller en het totaal bij</td><td class="pass">Geslaagd</td><td></td></tr>
+          <tr><td>T05</td><td>Het aantal verhogen naar 3 herberekent het subtotaal</td><td class="pass">Geslaagd</td><td></td></tr>
+          <tr><td>T06</td><td>Een negatief aantal wordt geweigerd</td><td class="fail">Afgekeurd</td><td><a href="#d02">D-02</a></td></tr>
+          <tr><td>T07</td><td>Een product verwijderen werkt de winkelwagen en de teller bij</td><td class="fail">Afgekeurd</td><td><a href="#d05">D-05</a></td></tr>
+          <tr><td>T08</td><td>Code WELKOM10 geeft 10% korting op het subtotaal</td><td class="pass">Geslaagd</td><td></td></tr>
+          <tr><td>T09</td><td>Een ongeldige code geeft een foutmelding en geen korting</td><td class="pass">Geslaagd</td><td></td></tr>
+          <tr><td>T10</td><td>De kortingscode kan maar één keer worden toegepast</td><td class="fail">Afgekeurd</td><td><a href="#d01">D-01</a></td></tr>
+          <tr><td>T11</td><td>Bij een subtotaal van precies € 50,00 is de verzending gratis</td><td class="fail">Afgekeurd</td><td><a href="#d03">D-03</a></td></tr>
+          <tr><td>T12</td><td>Bestellen met een lege winkelwagen wordt geblokkeerd</td><td class="fail">Afgekeurd</td><td><a href="#d06">D-06</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>3. Technisch defectrapport</h2>
+    <p>Elke bevinding is reproduceerbaar in de <a href="../demo/">demo-webwinkel</a> met de stappen hieronder. De genoemde bedragen zijn waargenomen tijdens de test.</p>
+
+    <article class="defect" id="d01">
+      <h3>D-01 Kortingscode kan onbeperkt worden herhaald <span class="sev hoog">Hoog</span></h3>
+      <dl>
+        <dt>Stappen</dt><dd>Voeg de Wollen Plaid (€ 34,00) toe. Vul WELKOM10 in en klik twee keer op Toepassen.</dd>
+        <dt>Verwacht</dt><dd>Korting € 3,40, totaal € 35,55 inclusief verzending. De tweede poging wordt geweigerd.</dd>
+        <dt>Waargenomen</dt><dd>Korting € 6,46, totaal € 32,49. Elke volgende klik haalt er opnieuw 10% af.</dd>
+        <dt>Oorzaak</dt><dd><code>applyCode</code> in <code>demo/app.js</code> vermenigvuldigt de kortingsfactor bij elke aanroep, zonder te onthouden dat de code al is gebruikt.</dd>
+        <dt>Oplossing</dt><dd>Leg vast dat de code is toegepast en weiger een tweede keer met een melding.</dd>
+      </dl>
+    </article>
+
+    <article class="defect" id="d02">
+      <h3>D-02 Negatief aantal levert een negatief orderbedrag op <span class="sev hoog">Hoog</span></h3>
+      <dl>
+        <dt>Stappen</dt><dd>Voeg de Geurkaars Vijg toe. Wijzig het aantal in de winkelwagen naar -2.</dd>
+        <dt>Verwacht</dt><dd>De invoer wordt geweigerd of teruggezet naar 1.</dd>
+        <dt>Waargenomen</dt><dd>Totaal € -45,05 en de teller in de kop toont -2. De bestelling kan daarna worden geplaatst.</dd>
+        <dt>Oorzaak</dt><dd><code>setQuantity</code> controleert alleen of de invoer een getal is. Het invoerveld heeft geen ondergrens.</dd>
+        <dt>Oplossing</dt><dd>Weiger waarden onder 1 in de code en zet <code>min="1"</code> op het invoerveld.</dd>
+      </dl>
+    </article>
+
+    <article class="defect" id="d03">
+      <h3>D-03 Geen gratis verzending bij precies € 50,00 <span class="sev middel">Middel</span></h3>
+      <dl>
+        <dt>Stappen</dt><dd>Voeg twee keer de Geurkaars Vijg toe (2 x € 25,00).</dd>
+        <dt>Verwacht</dt><dd>Verzending € 0,00, totaal € 50,00. De winkel belooft gratis verzending vanaf € 50,00.</dd>
+        <dt>Waargenomen</dt><dd>Verzending € 4,95, totaal € 54,95. Bij € 58,95 is de verzending wel gratis.</dd>
+        <dt>Oorzaak</dt><dd><code>totals</code> vergelijkt met "groter dan" in plaats van "groter dan of gelijk aan".</dd>
+        <dt>Oplossing</dt><dd>Pas de vergelijking aan en voeg een test toe voor de grenswaarde.</dd>
+      </dl>
+    </article>
+
+    <article class="defect" id="d04">
+      <h3>D-04 Zoeken is hoofdlettergevoelig <span class="sev middel">Middel</span></h3>
+      <dl>
+        <dt>Stappen</dt><dd>Typ "geurkaars" in het zoekveld.</dd>
+        <dt>Verwacht</dt><dd>De Geurkaars Vijg wordt getoond.</dd>
+        <dt>Waargenomen</dt><dd>"Geen producten gevonden." Met "Geurkaars" verschijnt het product wel.</dd>
+        <dt>Oorzaak</dt><dd><code>search</code> vergelijkt de zoekterm letterlijk met de productnaam.</dd>
+        <dt>Oplossing</dt><dd>Zet zoekterm en productnaam beide om naar kleine letters voor de vergelijking.</dd>
+      </dl>
+    </article>
+
+    <article class="defect" id="d05">
+      <h3>D-05 Winkelwagenteller blijft staan na verwijderen <span class="sev middel">Middel</span></h3>
+      <dl>
+        <dt>Stappen</dt><dd>Voeg de Keramische Mok toe en klik in de winkelwagen op Verwijder.</dd>
+        <dt>Verwacht</dt><dd>De winkelwagen is leeg en de teller in de kop toont 0.</dd>
+        <dt>Waargenomen</dt><dd>De winkelwagen is leeg, maar de teller toont nog 1.</dd>
+        <dt>Oorzaak</dt><dd>De afhandeling van Verwijder tekent de winkelwagen opnieuw, maar roept <code>renderBadge</code> niet aan.</dd>
+        <dt>Oplossing</dt><dd>Werk de teller bij in dezelfde stap als de winkelwagen.</dd>
+      </dl>
+    </article>
+
+    <article class="defect" id="d06">
+      <h3>D-06 Bestelling met lege winkelwagen wordt geaccepteerd <span class="sev laag">Laag</span></h3>
+      <dl>
+        <dt>Stappen</dt><dd>Vul naam en e-mailadres in zonder producten toe te voegen en klik op Bestelling plaatsen.</dd>
+        <dt>Verwacht</dt><dd>Een melding dat de winkelwagen leeg is.</dd>
+        <dt>Waargenomen</dt><dd>"Bedankt voor je bestelling van € 0,00."</dd>
+        <dt>Oorzaak</dt><dd>Het bestelformulier controleert alleen de verplichte velden, niet de inhoud van de winkelwagen.</dd>
+        <dt>Oplossing</dt><dd>Blokkeer het plaatsen bij een lege winkelwagen en toon een melding.</dd>
+      </dl>
+    </article>
+
+    <h2>4. Vervolg</h2>
+    <p>Na herstel van D-01 en D-02 volgt een hertest van alle twaalf scenario's, zodat ook zichtbaar wordt of de reparaties iets anders hebben geraakt. Een tweede cyclus kan de onderdelen dekken die nu buiten beeld bleven.</p>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">Voorbeeldrapport bij de showcase op thelovenda.store. <a href="../">Lees hoe deze werkwijze in elkaar zit</a>.</div>
+  </footer>
+</body>
+</html>
