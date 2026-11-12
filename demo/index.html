@@ -7,17 +7,17 @@
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="doc">
   <div class="notice">
     <div class="wrap">Dit is een demo-omgeving. De winkel is niet echt, er kan niets besteld worden en er zitten bewust fouten in. <a href="../rapport/">Bekijk het testrapport</a>.</div>
   </div>
   <header class="site">
-    <div class="wrap">
-      <a class="brand" href="../">The Lovenda Store</a>
+    <div class="wrap bar">
+      <a class="brand" href="../"><span class="prompt" aria-hidden="true">&gt;_</span> The Lovenda Store <small>demo</small></a>
       <nav>
         <a href="../">Over deze demo</a>
         <a href="../rapport/">Testrapport</a>
-        <span style="margin-left:16px">Winkelwagen <span class="badge" id="badge" aria-live="polite">0</span></span>
+        <span class="cart-label">Winkelwagen <span class="badge" id="badge" aria-live="polite">0</span></span>
       </nav>
     </div>
   </header>
@@ -25,7 +25,8 @@
   <main class="wrap">
     <div class="shop">
       <section aria-labelledby="h-products">
-        <h2 id="h-products">Producten</h2>
+        <p class="eyebrow">Demo-webwinkel</p>
+        <h1 id="h-products">Producten</h1>
         <p>Gratis verzending vanaf € 50,00. Met code WELKOM10 krijg je eenmalig 10% korting.</p>
         <label for="search">Zoeken</label>
         <input id="search" type="search" placeholder="Zoek een product" style="width:100%;max-width:340px">
@@ -71,7 +72,7 @@
   </main>
 
   <footer class="site">
-    <div class="wrap">Demo-omgeving bij een voorbeeld-acceptatietest. Ingevulde gegevens blijven in je browser en worden nergens naartoe gestuurd.</div>
+    <div class="wrap bar">Demo-omgeving bij een voorbeeld-acceptatietest. Ingevulde gegevens blijven in je browser en worden nergens naartoe gestuurd.</div>
   </footer>
   <script src="app.js"></script>
 </body>

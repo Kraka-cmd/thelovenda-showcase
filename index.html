@@ -3,71 +3,155 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Lovenda Store | Showcase AI-acceptatietesten</title>
-  <meta name="description" content="Een demo-webwinkel met bewust ingebouwde fouten en het acceptatietestrapport dat ze vindt. Showcase van een AI-ondersteunde testwerkwijze.">
+  <title>The Lovenda Store | Demo van een AI-acceptatietest</title>
+  <meta name="description" content="Een demo-webwinkel met zes bewust ingebouwde fouten en het acceptatietestrapport dat ze alle zes vindt. Voorbeeld van de testwerkwijze van Lovenda.">
+  <meta name="theme-color" content="#0d1117">
+  <meta property="og:title" content="Een webwinkel met zes fouten, en het rapport dat ze vindt">
+  <meta property="og:description" content="Probeer de demo-webwinkel en lees het acceptatietestrapport.">
+  <meta property="og:url" content="https://thelovenda.store">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Cpath d='M9 11l6 5-6 5' fill='none' stroke='%232dd4bf' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M17 22h7' stroke='%232dd4bf' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a class="skip" href="#main">Naar de inhoud</a>
+
   <header class="site">
-    <div class="wrap">
-      <a class="brand" href="./">The Lovenda Store</a>
-      <nav>
+    <div class="wrap bar">
+      <a class="brand" href="./"><span class="prompt" aria-hidden="true">&gt;_</span> The Lovenda Store <small>demo</small></a>
+      <nav aria-label="Hoofdmenu">
         <a href="demo/">Demo-webwinkel</a>
         <a href="rapport/">Testrapport</a>
+        <a href="#werkwijze">Werkwijze</a>
+        <a class="nav-cta" href="https://lovenda.nl">lovenda.nl</a>
       </nav>
     </div>
   </header>
 
-  <main class="wrap">
+  <main id="main">
     <section class="hero">
-      <h1>Een webwinkel met zes fouten, en het rapport dat ze vindt</h1>
-      <p>The Lovenda Store is geen echte winkel. Het is een demo waarmee ik laat zien wat een AI-ondersteunde acceptatietest oplevert: een samenvatting waar een opdrachtgever op kan beslissen en een defectrapport waar een developer direct mee verder kan.</p>
-      <a class="btn" href="rapport/">Bekijk het testrapport</a>
-      <a class="btn secondary" href="demo/">Probeer de demo-webwinkel</a>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="kicker"><span class="dot" aria-hidden="true"></span>AI-acceptatietest</p>
+          <h1>Een webwinkel met <span class="hl">zes fouten</span>, en het rapport dat ze vindt</h1>
+          <p class="lead">The Lovenda Store is geen echte winkel. Het is een demo die laat zien wat een acceptatietest oplevert: een samenvatting waarop een opdrachtgever kan beslissen en een defectrapport waarmee een developer direct verder kan.</p>
+          <div class="actions">
+            <a class="btn" href="demo/">Probeer de webwinkel</a>
+            <a class="btn ghost" href="rapport/">Bekijk het testrapport</a>
+          </div>
+        </div>
+
+        <aside class="challenge" aria-labelledby="h-challenge">
+          <h2 id="h-challenge">Vind jij ze alle zes?</h2>
+          <p>In de webwinkel zitten zes fouten. Dit zijn de plekken waar je moet zoeken.</p>
+          <ul class="hints">
+            <li><span><code>D-01</code>Kortingscode</span><span class="sev hoog">Hoog</span></li>
+            <li><span><code>D-02</code>Aantal in de winkelwagen</span><span class="sev hoog">Hoog</span></li>
+            <li><span><code>D-03</code>Gratis verzending</span><span class="sev middel">Middel</span></li>
+            <li><span><code>D-04</code>Zoeken</span><span class="sev middel">Middel</span></li>
+            <li><span><code>D-05</code>Winkelwagenteller</span><span class="sev middel">Middel</span></li>
+            <li><span><code>D-06</code>Bestelling plaatsen</span><span class="sev laag">Laag</span></li>
+          </ul>
+          <details>
+            <summary>Toon de antwoorden</summary>
+            <p>De kortingscode kan onbeperkt worden herhaald. Een negatief aantal geeft een negatief orderbedrag. Bij precies € 50,00 is de verzending niet gratis. Zoeken is hoofdlettergevoelig. De teller blijft staan na verwijderen. Een lege bestelling wordt geaccepteerd. <a href="rapport/#d01">Lees de uitwerking</a>.</p>
+          </details>
+        </aside>
+      </div>
     </section>
 
-    <h2>Wat je hier ziet</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>1. De demo-webwinkel</h3>
-        <p>Zes producten, een winkelwagen, een kortingscode en een bestelformulier. In de code zitten bewust zes fouten.</p>
-        <a href="demo/">Naar de demo</a>
-      </div>
-      <div class="card">
-        <h3>2. De testcyclus</h3>
-        <p>Twaalf scenario's, stap voor stap uitgevoerd in de browser met Claude. Alleen wat is waargenomen komt in het rapport.</p>
-        <a href="rapport/#d01">Naar de bevindingen</a>
-      </div>
-      <div class="card">
-        <h3>3. Het rapport</h3>
-        <p>Een samenvatting met advies voor de opdrachtgever en per bevinding de stappen, de oorzaak en de oplossing. Op te slaan als PDF.</p>
-        <a href="rapport/">Naar het rapport</a>
-      </div>
-    </div>
+    <section class="figures" aria-label="Uitkomst van de testcyclus">
+      <ul class="wrap">
+        <li><b>12</b><span>scenario's uitgevoerd</span></li>
+        <li><b class="pass">6</b><span>geslaagd</span></li>
+        <li><b class="fail">6</b><span>afgekeurd</span></li>
+        <li><b>2</b><span>bevindingen met ernst hoog</span></li>
+      </ul>
+    </section>
 
-    <h2>Zo werkt een testcyclus</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Scenario's afspreken</h3>
-        <p>We leggen vast wat de applicatie moet doen, in gewone taal en vanuit de gebruiker.</p>
+    <section class="wrap" id="onderdelen">
+      <p class="eyebrow">Wat je hier ziet</p>
+      <h2>Drie onderdelen, in deze volgorde</h2>
+      <div class="grid three">
+        <article class="card">
+          <h3><span class="ico" aria-hidden="true">01</span> De demo-webwinkel</h3>
+          <p>Zes producten, een winkelwagen, een kortingscode en een bestelformulier. In de code zitten bewust zes fouten.</p>
+          <p class="links"><a href="demo/">Naar de webwinkel</a></p>
+        </article>
+        <article class="card">
+          <h3><span class="ico" aria-hidden="true">02</span> De testcyclus</h3>
+          <p>Twaalf scenario's, stap voor stap uitgevoerd in de browser met Claude. Alleen wat is waargenomen komt in het rapport.</p>
+          <p class="links"><a href="rapport/#d01">Naar de bevindingen</a></p>
+        </article>
+        <article class="card">
+          <h3><span class="ico" aria-hidden="true">03</span> Het rapport</h3>
+          <p>Een samenvatting met advies voor de opdrachtgever en per bevinding de stappen, de oorzaak en de oplossing. Op te slaan als PDF.</p>
+          <p class="links"><a href="rapport/">Naar het rapport</a></p>
+        </article>
       </div>
-      <div class="card">
-        <h3>Stap voor stap testen</h3>
-        <p>Elk scenario wordt in de echte applicatie doorlopen. Er wordt niets aangenomen dat niet is gezien.</p>
+    </section>
+
+    <section class="band" id="werkwijze">
+      <div class="wrap">
+        <p class="eyebrow">Werkwijze</p>
+        <h2>Zo werkt een testcyclus</h2>
+        <p class="section-lead">Dezelfde vier stappen als bij een echte opdracht.</p>
+        <ol class="steps">
+          <li>
+            <code>01 scenario's</code>
+            <h3>Afspreken</h3>
+            <p>We leggen vast wat de applicatie moet doen, in gewone taal en vanuit de gebruiker.</p>
+          </li>
+          <li>
+            <code>02 test</code>
+            <h3>Stap voor stap testen</h3>
+            <p>Elk scenario wordt in de echte applicatie doorlopen. Er wordt niets aangenomen dat niet is gezien.</p>
+          </li>
+          <li>
+            <code>03 rapport</code>
+            <h3>Rapporteren</h3>
+            <p>Je krijgt een samenvatting voor de beslisser en een technisch defectrapport voor het team, ook als PDF.</p>
+          </li>
+          <li>
+            <code>04 hertest</code>
+            <h3>Hertesten</h3>
+            <p>Na herstel worden alle scenario's opnieuw gedraaid, zodat je ziet of de reparaties iets anders hebben geraakt.</p>
+          </li>
+        </ol>
       </div>
-      <div class="card">
-        <h3>Rapporteren</h3>
-        <p>Je krijgt een samenvatting voor de beslisser en een technisch defectrapport voor het team, ook als PDF.</p>
+    </section>
+
+    <section class="wrap" id="contact">
+      <div class="cta">
+        <div>
+          <h2>Dit rapport, maar dan over jouw applicatie?</h2>
+          <p>Eén testcyclus tegen een vaste prijs, vanaf € 750. Op lovenda.nl staat hoe het werkt en wat je krijgt.</p>
+        </div>
+        <a class="btn" href="https://lovenda.nl/#contact">Naar lovenda.nl</a>
       </div>
-      <div class="card">
-        <h3>Hertesten</h3>
-        <p>Na herstel worden alle scenario's opnieuw gedraaid, zodat je ziet of de reparaties iets anders hebben geraakt.</p>
-      </div>
-    </div>
+    </section>
   </main>
 
   <footer class="site">
-    <div class="wrap">The Lovenda Store is een demonstratie. Er worden geen producten verkocht en geen gegevens verzameld.</div>
+    <div class="wrap bar">
+      <span>The Lovenda Store is een demonstratie. Er worden geen producten verkocht en geen gegevens verzameld.</span>
+      <span class="foot-links">
+        <a href="https://lovenda.nl">lovenda.nl</a>
+        <a href="https://github.com/Kraka-cmd/thelovenda-showcase">Broncode</a>
+      </span>
+    </div>
   </footer>
+
+  <script>
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('js');
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { threshold: 0.12 });
+      document.querySelectorAll('.card, .steps li, .cta, .figures li').forEach((el, i) => {
+        el.classList.add('reveal'); el.style.transitionDelay = (i % 4) * 60 + 'ms'; io.observe(el);
+      });
+    }
+  </script>
 </body>
 </html>
